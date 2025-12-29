@@ -32,5 +32,7 @@ resource "helm_release" "argocd" {
   repository = "https://argoproj.github.io/argo-helm"
   version    = "7.7.0"
 
-  namespace = "argocd"
+  # namespace = "argocd"
+  namespace  = kubernetes_namespace_v1.argocd-namespace.metadata[0].name
+  depends_on = [kubernetes_namespace_v1.argocd-namespace]
 }
